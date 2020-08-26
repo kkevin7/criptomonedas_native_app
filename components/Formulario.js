@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, TouchableHighlight, Alert} from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import axios from 'axios';
 
-const Formulario = ({moneda, criptomoneda, setMoneda, setCriptomoneda}) => {
+const Formulario = ({moneda, criptomoneda, setMoneda, setCriptomoneda, setValidarForm}) => {
   const [criptomonedas, setCriptomonedas] = useState(null);
 
   useEffect(() => {
