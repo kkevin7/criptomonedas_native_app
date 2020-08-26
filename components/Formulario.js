@@ -4,13 +4,9 @@ import {Picker} from '@react-native-community/picker';
 import axios from 'axios';
 
 const Formulario = () => {
-    const [ moneda, setMoneda] = useState('');
-    const [ criptomoneda, setCriptomoneda] = useState('');
-    const [ criptomonedas, setCriptomonedas] = useState('');
-
-    const obtenerMonenda = moneda => {
-        setMoneda(moneda);
-    }
+    const [ moneda, setMoneda] = useState(null);
+    const [ criptomoneda, setCriptomoneda] = useState(null);
+    const [ criptomonedas, setCriptomonedas] = useState(null);
 
     useEffect(() => {
         const consultarAPI = async () => {
@@ -23,6 +19,16 @@ const Formulario = () => {
         consultarAPI();
     }, [])
 
+    // Almacena las selecciones del usuario
+    const obtenerMonenda = moneda => {
+        setMoneda(moneda);
+    }
+    const obtenerCriptoneda = cripto => {
+        setCriptomoneda(cripto);
+    }
+
+    if(!criptomonedas) return null;
+
     return ( 
         <>
             <View>
@@ -30,6 +36,7 @@ const Formulario = () => {
                 <Picker
                     selectedValue={moneda}
                     onValueChange={moneda => obtenerMonenda(moneda)}
+                    itemStyle={{height: 120}}
                 >
                     <Picker.Item label="- Seleccione -" value="" />
                     <Picker.Item label="Dolar de Estados Unidos" value="USD" />
@@ -38,7 +45,19 @@ const Formulario = () => {
                     <Picker.Item label="Libra Esterlina" value="GBP" />
                 </Picker>
                 <Text style={styles.label}>Criptomoneda</Text>
+                <Picker
+                    selectedValue={criptomoneda}
+                    onValueChange={criptomoneda => obtenerCriptoneda(criptomoneda)}
+                    itemStyle={{height: 120}}
+                >
+                    <Picker.Item label="- Seleccione -" value="" />
+                    {criptomonedas.map(cripto => (
+                        <Picker.Item key={cripto.CoinInfo.Id} label={cripto.CoinInfo.FullName} value={cripto.CoinInfo.Name} />
+                    ))}
+                </Picker>
             </View>
+
+            
         </>
      );
 }
