@@ -34,21 +34,23 @@ const App = () => {
 
   return (
     <>
-      <Header />
-      <Image
-        style={styles.imagen}
-        source={require('./assets/img/cryptomonedas.png')}
-      />
-      <View style={styles.contenido}>
-        <Formulario
-          moneda={moneda}
-          criptomoneda={criptomoneda}
-          setMoneda={setMoneda}
-          setCriptomoneda={setCriptomoneda}
-          setValidarForm={setValidarForm}
+      <ScrollView>
+        <Header />
+        <Image
+          style={styles.imagen}
+          source={require('./assets/img/cryptomonedas.png')}
         />
-        <Cotizacion resultado={resultado}/>
-      </View>
+        <View style={styles.contenido}>
+          <Formulario
+            moneda={moneda}
+            criptomoneda={criptomoneda}
+            setMoneda={setMoneda}
+            setCriptomoneda={setCriptomoneda}
+            setValidarForm={setValidarForm}
+          />
+        </View>
+        <Cotizacion resultado={resultado} />
+      </ScrollView>
     </>
   );
 };
