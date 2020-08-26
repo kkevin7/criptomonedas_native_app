@@ -9,7 +9,7 @@ import {
     Image,
 } from "react-native";
 import Header from "./components/Header";
-import Forulario from './components/Formulario';
+import Formulario from './components/Formulario';
 
 const App = () => {
   return (
@@ -20,7 +20,7 @@ const App = () => {
         source={require('./assets/img/cryptomonedas.png')}
       />
       <View style={styles.contenido}>
-      <Forulario/>
+      <Formulario/>
       </View>
     </>
   );
