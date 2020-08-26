@@ -10,12 +10,14 @@ import {
 } from 'react-native';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
+import Cotizacion from './components/Cotizacion';
 import axios from 'axios';
 
 const App = () => {
   const [moneda, setMoneda] = useState('');
   const [criptomoneda, setCriptomoneda] = useState('');
   const [validarForm, setValidarForm] = useState(false);
+  const [resultado, setResultado] = useState(null);
 
   useEffect(() => {
     const cotizarCriptomenda = async () => {
@@ -23,7 +25,7 @@ const App = () => {
         // consultar la api para obtner la cotización
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
         const response = await axios.get(url);
-        console.log(response.data.DISPLAY);
+        console.log(response.data.DISPLAY[criptomoneda][moneda]);
         setValidarForm(false);
       }
     };
@@ -45,6 +47,7 @@ const App = () => {
           setCriptomoneda={setCriptomoneda}
           setValidarForm={setValidarForm}
         />
+        <Cotizacion resultado={resultado}/>
       </View>
     </>
   );
