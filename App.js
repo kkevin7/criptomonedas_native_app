@@ -9,6 +9,7 @@ import {
     Image,
 } from "react-native";
 import Header from "./components/Header";
+import Forulario from './components/Formulario';
 
 const App = () => {
   return (
@@ -18,6 +19,9 @@ const App = () => {
         style={styles.imagen}
         source={require('./assets/img/cryptomonedas.png')}
       />
+      <View style={styles.contenido}>
+      <Forulario/>
+      </View>
     </>
   );
 };
@@ -27,7 +31,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 150,
     marginHorizontal: '2.5%',
-
+  },
+  contenido: {
+    marginHorizontal: '2.5%',
   }
 });
 
