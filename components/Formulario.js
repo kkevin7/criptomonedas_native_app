@@ -12,7 +12,7 @@ const Formulario = ({moneda, criptomoneda, setMoneda, setCriptomoneda, setValida
         'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
       const response = await axios.get(url);
       if (response.status === 200) {
-        setCriptomonedas(response.data.Data);
+        await setCriptomonedas(response.data.Data);
       }
     };
     consultarAPI();
