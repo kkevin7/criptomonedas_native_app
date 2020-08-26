@@ -4,9 +4,8 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
-  StatusBar,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
@@ -18,6 +17,7 @@ const App = () => {
   const [criptomoneda, setCriptomoneda] = useState('');
   const [validarForm, setValidarForm] = useState(false);
   const [resultado, setResultado] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const cotizarCriptomenda = async () => {
@@ -25,8 +25,18 @@ const App = () => {
         // consultar la api para obtner la cotización
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
         const response = await axios.get(url);
-        await setResultado(response.data.DISPLAY[criptomoneda][moneda]);
-        setValidarForm(false);
+
+        // loading start
+        setLoading(true);
+
+        //Hide the spinner y show data
+        setTimeout(() => {
+          setResultado(response.data.DISPLAY[criptomoneda][moneda]);
+          setValidarForm(false);
+          //loading finish
+          setLoading(false);
+        },300);
+
       }
     };
     cotizarCriptomenda();
@@ -49,7 +59,13 @@ const App = () => {
             setValidarForm={setValidarForm}
           />
         </View>
-        <Cotizacion resultado={resultado} />
+        <View>
+        {loading ? <ActivityIndicator
+          style={{marginTop: 40}}
+          size="large"
+          color="#5E49E2"
+        /> : <Cotizacion resultado={resultado} />}
+        </View>
       </ScrollView>
     </>
   );
