@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -12,6 +12,11 @@ import Header from "./components/Header";
 import Formulario from './components/Formulario';
 
 const App = () => {
+
+  const [moneda, setMoneda] = useState('');
+  const [criptomoneda, setCriptomoneda] = useState('');
+  const [validarForm, setValidarForm] = useState(false);
+
   return (
     <>
       <Header/>
@@ -20,7 +25,13 @@ const App = () => {
         source={require('./assets/img/cryptomonedas.png')}
       />
       <View style={styles.contenido}>
-      <Formulario/>
+      <Formulario 
+        moneda={moneda}
+        criptomoneda={criptomoneda}
+        setMoneda={setMoneda}
+        setCriptomoneda={setCriptomoneda}
+        setValidarForm={setValidarForm}
+      />
       </View>
     </>
   );
